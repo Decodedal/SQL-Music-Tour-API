@@ -1,36 +1,26 @@
+
 'use strict';
-
-const { sequelize } = require('../models');
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('events', {
         event_id:{
-          type:sequelize.INTEGER,
+          type:Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true
         },
         name: {
-          type:sequelize.STRING,
+          type:Sequelize.STRING,
           allowNull:false
         },
         start_time: {
-          type:sequelize.DATE,
-          allowNull:flase
+          type:Sequelize.DATE,
+          allowNull:false
         },
         end_time:{
-          type:sequelize.DATE,
-          allowNull:flase
-        },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+          type:Sequelize.DATE,
+          allowNull:false
+        }
     });
   },
   async down(queryInterface, Sequelize) {
