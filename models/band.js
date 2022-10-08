@@ -45,6 +45,3 @@ module.exports = (sequelize, DataTypes) => {
 };
 
 
-
-//EXPORT
-module.exports = Band
