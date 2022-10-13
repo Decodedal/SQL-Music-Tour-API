@@ -1,6 +1,6 @@
 const Stages = require('express').Router()
 const db = require('../models')
-const{stage} = db
+const{stage,event} = db
 
 //FIND ALL STAGES
 
@@ -19,8 +19,12 @@ Stages.get('/:id', async(req,res)=>{
         const foundStage = stage.findOne({
             where:{
                 stage_id:req.params.id
-            }
-        })
+            },
+            include:{
+            model:event,
+            as:"events"   
+    }
+})
         res.status(200).json(foundStage)
     }catch(error){
         res.status(500).json(error)

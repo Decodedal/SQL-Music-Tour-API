@@ -1,6 +1,6 @@
 const events = require('express').Router()
 const db = require('../models')
-const{event} = db
+const{event,meet_greet,SetTime,stage} = db
 
 //Find all events 
 
@@ -17,7 +17,21 @@ events.get('/',async(req,res)=>{
 events.get('/:id', async (req,res)=>{
     try{
         const foundEvent = await event.findOne({
-            where:{event_id:req.params.id}
+            where:{event_id:req.params.id},
+            include:[
+                {
+                    model:meet_greet,
+                    as:"meet_greets"
+                },
+                {
+                    module:SetTime,
+                    as:"set_times"
+                },
+                {
+                    module:stage,
+                    as:"stages"
+                }
+            ]
         })
         res.status(200).json(foundBand)
     }catch(error){
