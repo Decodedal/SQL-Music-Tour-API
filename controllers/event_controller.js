@@ -1,6 +1,6 @@
 const events = require('express').Router()
 const db = require('../models')
-const{event,meet_greet,SetTime,stage} = db
+const{event,meet_greet,SetTime,StageEvent, stage} = db
 
 //Find all events 
 
@@ -28,8 +28,8 @@ events.get('/:id', async (req,res)=>{
                     as:"set_times"
                 },
                 {
-                    module:stage,
-                    as:"stages"
+                    module:StageEvent,
+                    include:{module:stage, as:"stages"}
                 }
             ]
         })
